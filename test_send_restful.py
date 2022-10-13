@@ -1,8 +1,29 @@
 # importing the requests library
-import requests
-  
+import requests, json, base64
+
 # defining the api-endpoint 
-API_ENDPOINT = "http://127.0.0.1:8000/upload"
+api_url = "http://127.0.0.1:8000/upload"
+image_file = '/home/cmit/dev_ws/ham_image/rgb_0.png'
+
+headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+
+data = open(image_file, 'rb').read()
+
+with open(image_file, "rb") as f:
+    im_bytes = f.read()        
+im_b64 = base64.b64encode(im_bytes).decode("utf8")
+#print(im_b64)
+
+payload = json.dumps({"image": im_b64})
+
+response = requests.post(api_url, data=payload, headers=headers)
+try:
+    data = response.json()     
+    print(data)                
+except requests.exceptions.RequestException:
+    print(response.text)
+
+exit()
 
 # your API key here
 API_KEY = "XXXXXXXXXXXXXXXXX"
@@ -22,7 +43,7 @@ data = {'api_dev_key':API_KEY,
         'api_paste_format':'python'}
 
 # sending post request and saving response as response object
-res = requests.post(url = API_ENDPOINT, data = data)
+res = requests.post(url=api_url, data=payload, headers=headers)
 
 # extracting response text 
 print(type(res))
