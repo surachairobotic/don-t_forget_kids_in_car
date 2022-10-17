@@ -3,7 +3,7 @@ import requests, json, base64
 
 # defining the api-endpoint 
 api_url = "http://127.0.0.1:8000/upload"
-image_file = '/home/cmit/dev_ws/ham_image/rgb_0.png'
+image_file = '/home/thinkpad/Pictures/Home-icon.png'
 
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
