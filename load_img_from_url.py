@@ -9,7 +9,7 @@ def main():
 
     while True:
         t = time.time()
-        response = requests.get('http://192.168.1.104/capture')
+        response = requests.get('http://192.168.1.106/capture')
         img = Image.open(BytesIO(response.content))
 
         #img.show()
@@ -19,7 +19,7 @@ def main():
         # Convert RGB to BGR 
         open_cv_image = open_cv_image[:, :, ::-1].copy()
         (h, w) = open_cv_image.shape[:2]
-        div = 4
+        div = 1
         dim = (int(w/div), int(h/div))
         open_cv_image = cv2.resize(open_cv_image, dim)
         
